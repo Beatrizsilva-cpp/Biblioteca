@@ -79,7 +79,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="/genero/">
-                        Genero
+                        Gênero
                     </a>
                 </li>
 
@@ -102,9 +102,39 @@
     </nav>
 
 
-    <!-- Mensagem inicial -->
+    <!-- Conteúdo principal -->
     <div class="container mt-5">
 
+
+        <!-- Mensagem de sucesso -->
+        {% if messages %}
+
+            {% for message in messages %}
+
+                <div class="alert alert-success alert-dismissible fade show"
+                     role="alert">
+
+                    {{ message }}
+
+                    <button type="button"
+                            class="close"
+                            data-dismiss="alert"
+                            aria-label="Fechar">
+
+                        <span aria-hidden="true">
+                            &times;
+                        </span>
+
+                    </button>
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+
+        <!-- Mensagem inicial -->
         <div class="jumbotron text-center">
 
             <h1 class="display-4">
@@ -135,42 +165,21 @@
 
                     <tr>
 
-                        <th scope="col">
-                            Nome
-                        </th>
-
-                        <th scope="col">
-                            Autor
-                        </th>
-
-                        <th scope="col">
-                            Editora
-                        </th>
-
-                        <th scope="col">
-                            Gênero
-                        </th>
-
-                        <th scope="col">
-                            Preço
-                        </th>
-
-                        <th scope="col">
-                            Data Publicação
-                        </th>
-
-                        <th scope="col">
-                            Status
-                        </th>
-
-                        <th scope="col">
-                            Excluir
-                        </th>
+                        <th>Nome</th>
+                        <th>Autor</th>
+                        <th>Editora</th>
+                        <th>Gênero</th>
+                        <th>Preço</th>
+                        <th>Data Publicação</th>
+                        <th>Status</th>
+                        <th>Excluir</th>
 
                     </tr>
 
                 </thead>
-
+                    <th scope="col">Editar</th>
+                    <td><a href="editar/{{ livros.id }}" class="btn
+                        btn-warning">Editar</a></td>
 
                 <tbody>
 
@@ -271,38 +280,3 @@
 </body>
 
 </html>
-            <!-- Botao Delete -->
-            <table class="table">
-                <thead>
-                <tr>
-                <th scope="col">Nome</th>
-                <th scope="col">Autor</th>
-                <th scope="col">Editora</th>
-                <th scope="col">Gênero</th>
-                <th scope="col">Preço</th>
-                <th scope="col">Data Publicação</th>
-                <th scope="col">Status</th>
-                <th scope="col">Excluir</th>
-                </tr>
-                </thead>
-                <tbody>
-                    {% for livros in livros %}
-                    <tr>
-                    <td>{{ livros.nome }}</td>
-                    <td>{{ livros.autor }}</td>
-                    <td>{{ livros.editora }}</td>
-                    <td>
-                        {% for genero in livros.genero.all %}
-                        {{ genero.nome }}{% if not forloop.last %},
-                        {% endif %}
-                        {% endfor %}
-                        </td>
-                        <td>{{ livros.preco }}</td>
-                        <td>{{ livros.data_plub }}</td>
-                        <td>{{ livros.status }}</td>
-                        <td><a href="delete/{{ livros.id }}"
-                        class="btn btn-danger">Excluir</a></td>
-                        </tr>
-                        {% endfor %}
-                        </tbody>
-                        
